@@ -1,2 +1,5 @@
 # Start repository git
     $ git init
+
+    # 1. Initialize the Node-JS Project
+    $ npm init -y
