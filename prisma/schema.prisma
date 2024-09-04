@@ -12,15 +12,3 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
-model User {
-  id String @id @unique @default(uuid()) @db.Uuid
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  updateAt DateTime @updatedAt @db.Timestamp(6)
-  email String @unique @db.VarChar(80)
-  name String @db.VarChar(80)
-  active Boolean @default(false)
-  code Int @unique
-
-  @@index([email])
-}
