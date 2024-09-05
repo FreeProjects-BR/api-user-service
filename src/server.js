@@ -5,7 +5,7 @@ import app from './app.js';
 const env = process.env.NOD_ENV || 'development';
 dotenv.config({ path: `.env${env === 'production' ? '.production' : ''}` });
 
-const port = process.env.API_PORT || 801;
+const port = process.env.API_PORT || 8001;
 
 const server = http.createServer(app);
 server.listen(port, () => {
