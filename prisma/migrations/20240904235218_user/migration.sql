@@ -2,7 +2,7 @@
 CREATE TABLE "User" (
     "id" UUID NOT NULL,
     "createdAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updateAt" TIMESTAMP(6) NOT NULL,
+    "updatedAt" TIMESTAMP(6) NOT NULL,
     "email" VARCHAR(80) NOT NULL,
     "name" VARCHAR(80) NOT NULL,
     "active" BOOLEAN NOT NULL DEFAULT false,
