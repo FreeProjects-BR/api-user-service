@@ -15,6 +15,14 @@ model User {
   name String @db.VarChar(80)
   active Boolean @default(false)
   code Int @unique
+  password            String              @db.VarChar(255)
+  resetPasswordToken  String?   @db.VarChar(255)
+  resetPasswordSentAt DateTime?
+  rememberCreateAt    DateTime?
+  lastPasswordUpdate  DateTime? @db.Timestamp(6)
+  passwordExpiration  DateTime? @db.Timestamp(6)
+  failedLoginAttempts Int?      @default(0)
+  lockoutTime         DateTime?
 
   @@index([email])
 }
