@@ -7,6 +7,6 @@ export function checkEmptyToNot(value, fielName = 'O campo') {
   }
   return {
     success: true,
-    message: `${fielName} está preenchido`,
+    message: `${fielName} está preenchido.`,
   };
 }
