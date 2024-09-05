@@ -19,7 +19,7 @@ export const passwordNewEncrypt = async (password) => {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     return { hashedPassword, statusCode: 200 };
   } catch (error) {
-    error.message = 'Erro ao criptografar a senha';
+    error.message = 'Erro ao criptografar a senha.';
     error.statusCode = 500;
     throw error;
   }
