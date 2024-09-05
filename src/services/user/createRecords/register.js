@@ -1,5 +1,5 @@
 import { userRegisterModel } from '../../../models/user/createRecords/register.js';
-import { passwordNewEncrypt } from '../../../utils/password/passwordNew.js';
+import { passwordNewEncrypt } from '../../../utils/password/password_new.js';
 import { userGenerateCode } from '../../../utils/user/generate_code.js';
 /**
  * @typedef {Object} UserData
