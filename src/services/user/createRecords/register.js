@@ -1,35 +1,37 @@
 import { userRegisterModel } from '../../../models/user/createRecords/register.js';
+import { passwordNewEncrypt } from '../../../utils/password/passwordNew.js';
 import { userGenerateCode } from '../../../utils/user/generate_code.js';
 /**
  * @typedef {Object} UserData
- * @property {string} name - O nome do usuário.
- * @property {string} email - O e-mail do usuário.
+ * @property {string} name
+ * @property {string} email
  */
 
 /**
  * @typedef {Object} ServiceResponse
- * @property {number} statusCode - O código de status da resposta.
- * @property {string} message - A mensagem de resposta.
- * @property {Object} data - Os dados do novo usuário criado.
- * @property {number} data.id - O ID do usuário.
- * @property {string} data.email - O e-mail do usuário.
- * @property {string} data.name - O nome do usuário.
- * @property {boolean} data.active - Se o usuário está ativo.
- * @property {string} data.code - O código do usuário.
- * @property {Date} data.createdAt - A data de criação do usuário.
- * @property {Date} data.updatedAt - A data da última atualização do usuário.
+ * @property {number} statusCode
+ * @property {string} message
+ * @property {Object} data
+ * @property {number} data.id
+ * @property {string} data.email
+ * @property {string} data.name
+ * @property {boolean} data.active
+ * @property {string} data.code
+ * @property {string} data.password
+ * @property {Date} data.createdAt
+ * @property {Date} data.updatedAt
  */
 
 /**
  * Cria um novo usuário e realiza validações.
- * @param {UserData} data - Dados do usuário a ser registrado.
- * @returns {Promise<ServiceResponse>} - A resposta contendo o status, mensagem e dados do usuário criado.
- * @throws {Error} - Lança um erro se houver um problema com os dados ou ao criar o usuário.
+ * @param {UserData} data
+ * @returns {Promise<ServiceResponse>}
+ * @throws {Error}
  */
 export const userRegisterServices = async (data) => {
-  const { name, email } = data;
+  const { name, email, password } = data;
 
-  if (!name || !email) {
+  if (!name || !email || !password) {
     const error = new Error('Nome, email e senha são obrigatórios.');
     error.statusCode = 400;
     throw error;
@@ -38,6 +40,8 @@ export const userRegisterServices = async (data) => {
   // Gera um código único para o usuário.
   const codeUnique = await userGenerateCode();
 
+  const { hashedPassword } = await passwordNewEncrypt(password);
+
   try {
     // Cria o novo usuário
     const newUser = await userRegisterModel({
@@ -45,6 +49,7 @@ export const userRegisterServices = async (data) => {
       name,
       active: true,
       code: codeUnique,
+      password: hashedPassword,
     });
 
     console.log('Usuário criado com sucesso:', newUser);
