@@ -35,21 +35,24 @@ export const userRegisterModel = async (data) => {
     const newUser = await dbService.user.create({
       data,
       select: {
-        id: false,
-        createdAt: false,
-        updatedAt: false,
+        id: true,
+        createdAt: true,
+        updatedAt: true,
         email: true,
         name: true,
-        active: false,
+        active: true,
         code: true,
-        password: false,
+        password: true,
       },
     });
 
     return {
+      statusCode: 201,
+      message: 'Usuário criado com sucesso',
       data: newUser,
     };
   } catch (error) {
+    console.error('Erro detalhado ao criar usuário:', error); // Adicione esta linha
     const customError = new Error('Error ao criar usuário no banco de dados.');
     customError.statusCode = 500;
     throw customError;
