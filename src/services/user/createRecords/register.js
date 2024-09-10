@@ -2,6 +2,9 @@ import { userRegisterModel } from '../../../models/user/createRecords/register.j
 import { emailValidateSchima } from '../../../validations/schemas/schema_email.js';
 import { passwordNewEncrypt } from '../../../utils/password/password_new.js';
 import { userGenerateCode } from '../../../utils/user/generate_code.js';
+import { nameValidateSchema } from '../../../validations/schemas/schema_name.js';
+import { passwordValidateSchema } from '../../../validations/schemas/schema_password.js';
+
 /**
  * @typedef {Object} UserData
  * @property {string} name
@@ -51,6 +54,22 @@ export const userRegisterServices = async (data) => {
   const emailValidationResult = emailValidateSchima(email);
   if (!emailValidationResult.success) {
     const error = new Error(emailValidationResult.message);
+    error.statusCode = 400;
+    throw error;
+  }
+
+  // Validação do name usando nameValidateSchima
+  const nameValidationResult = nameValidateSchema(name);
+  if (!nameValidationResult.success) {
+    const error = new Error(nameValidationResult.message);
+    error.statusCode = 400;
+    throw error;
+  }
+
+  // Validação do password usando passwordValidateSchema
+  const passwordValidationResult = passwordValidateSchema(password);
+  if (!passwordValidationResult.success) {
+    const error = new Error(passwordValidationResult.message);
     error.statusCode = 400;
     throw error;
   }
