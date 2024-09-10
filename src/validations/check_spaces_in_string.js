@@ -1,4 +1,4 @@
-export function checkAndRemoveSpaces(value, fieldName = 'O campo') {
+export function checkSpacesInString(value, fieldName = 'O campo') {
   if (typeof value !== 'string') {
     return {
       success: false,
