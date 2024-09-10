@@ -1,8 +1,7 @@
 import { checkEmptyToNot } from '../empty_do_not_check.js';
-import { checkFieldTrim } from '../check_field_remove_outer_space.js';
-import { checkNoSpacesInString } from '../check_no_spaces_in_string.js';
+import { checkFieldTrim } from '../trim_field_check.js';
+import { checkSpacesInString } from '../check_spaces_in_string.js';
 import { checkIsValidEmail } from '../isValidEmail.js';
-import { checkLength } from '../checkLength.js';
 
 export function emailValidateSchima(email) {
   // Verificar se o campo está vazio
@@ -15,7 +14,7 @@ export function emailValidateSchima(email) {
   const trimmedEmail = checkFieldTrim(email);
 
   // Verificar se há espaços entre os caracteres
-  const spaceCheck = checkNoSpacesInString(trimmedEmail, 'E-mail');
+  const spaceCheck = checkSpacesInString(trimmedEmail, 'E-mail');
   if (!spaceCheck.success) {
     return spaceCheck;
   }
@@ -24,12 +23,6 @@ export function emailValidateSchima(email) {
   const emailValidCheck = checkIsValidEmail(trimmedEmail);
   if (!emailValidCheck.success) {
     return emailValidCheck;
-  }
-
-  // Verificar o comprimento do e-mail.
-  const lengthCheck = checkLength(email, 12, 80, 'E-mail');
-  if (!lengthCheck.success) {
-    return lengthCheck;
   }
 
   // Se todas as verificações passaram, retornar sucesso
