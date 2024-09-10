@@ -1,4 +1,5 @@
 import { userRegisterModel } from '../../../models/user/createRecords/register.js';
+import { emailValidateSchima } from '../../../validations/schemas/schema_email.js';
 import { passwordNewEncrypt } from '../../../utils/password/password_new.js';
 import { userGenerateCode } from '../../../utils/user/generate_code.js';
 /**
@@ -31,8 +32,25 @@ import { userGenerateCode } from '../../../utils/user/generate_code.js';
 export const userRegisterServices = async (data) => {
   const { name, email, password } = data;
 
-  if (!name || !email || !password) {
-    const error = new Error('Nome, email e senha são obrigatórios.');
+  // Lista de campos ausentes
+  const missingFields = [];
+  if (!name) missingFields.push('Nome');
+  if (!email) missingFields.push('E-mail');
+  if (!password) missingFields.push('Senha');
+
+  // Se houver campos ausentes, cria uma mensagem dinâmica
+  if (missingFields.length > 0) {
+    const error = new Error(
+      `${missingFields.join(', ')} ${missingFields.length > 1 ? 'são obrigatórios.' : 'é obrigatório.'}`,
+    );
+    error.statusCode = 400;
+    throw error;
+  }
+
+  // Validação do e-mail usando emailValidateSchima
+  const emailValidationResult = emailValidateSchima(email);
+  if (!emailValidationResult.success) {
+    const error = new Error(emailValidationResult.message);
     error.statusCode = 400;
     throw error;
   }
