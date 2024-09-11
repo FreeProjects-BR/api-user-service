@@ -1,5 +1,5 @@
 import { checkEmptyToNot } from '../empty_do_not_check.js';
-import { checkFieldTrim } from '../trim_field_check.js';
+import { checkFieldTrim } from '../check_field_remove_outer_space.js';
 import { checkSpacesInString } from '../check_spaces_in_string.js';
 import { checkIsValidEmail } from '../isValidEmail.js';
 

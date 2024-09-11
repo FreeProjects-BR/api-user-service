@@ -47,8 +47,6 @@ export const userRegisterModel = async (data) => {
     });
 
     return {
-      statusCode: 201,
-      message: 'Usuário criado com sucesso',
       data: newUser,
     };
   } catch (error) {
