@@ -1,34 +1,23 @@
 import dbService from '../../../config/database.js';
 
 /**
- * Encontra um usuário pelo email.
+ * Encontra um usuário pelo e-mail.
  * @param {string} email
- * @returns {Promise<Object|null>}
+ * @returns {Promise<Object>}
  */
-export async function findUserByEmail(email) {
-  try {
-    const user = await dbService.user.findUnique({
-      where: {
-        email: email,
-      },
-    });
-
-    if (!user) {
-      return {
-        success: false,
-        message: 'Usuário não encontrado.',
-      };
-    }
-
-    return {
-      success: true,
-      user,
-    };
-  } catch (error) {
-    return {
-      success: false,
-      message: 'Erro ao buscar usuário pelo email.',
-      error: error.message,
-    };
-  }
-}
+export const findUserByEmail = async (email) => {
+  const user = await dbService.user.findUnique({
+    where: { email },
+    select: {
+      id: true,
+      createdAt: false,
+      updatedAt: false,
+      email: false,
+      name: false,
+      active: false,
+      code: true,
+      password: true,
+    },
+  });
+  return user;
+};
