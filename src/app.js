@@ -3,6 +3,7 @@ import cron from 'node-cron';
 import { errorHandler } from './middleware/errorHancler.js';
 import publicRoutes from './routes/public.js';
 import { cleanExpiredTokens } from './jobs/clean_tokens.js';
+import privateRoutes from './routes/private.js';
 
 const app = express();
 
@@ -14,6 +15,7 @@ cron.schedule('0 * * * *', () => {
 });
 
 app.use('/api/user-service', publicRoutes);
+app.use('/api/user-service', privateRoutes);
 
 app.get('/api/user-service/message', (req, res) => {
   res.send('Olá, API User Service rodando na PORT 8001.');
