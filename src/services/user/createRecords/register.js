@@ -97,16 +97,12 @@ export const userRegisterServices = async (data) => {
       password: hashedPassword,
     });
 
-    console.log('Usuário criado com sucesso:', newUser);
-
     return {
       statusCode: 201,
       message: 'Usuário criado com sucesso.',
       data: newUser,
     };
   } catch (error) {
-    console.error('Erro ao criar usuário:', error); // Log detalhado
-
     const customError = new Error('Erro ao criar usuário.');
     customError.statusCode = 500;
     throw customError;
