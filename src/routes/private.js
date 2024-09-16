@@ -1,5 +1,5 @@
 import express from 'express';
-import findRecordsPrivateRoutes from './user/findRecords/privateRoutes.js';
+import findRecordsPrivateRoutes from './user/findRecords/private_routes.js';
 
 const privateRoutes = express.Router();
 
