@@ -14,7 +14,7 @@ const isCodeUnique = async (code) => {
 export const userGenerateCode = async () => {
   let code;
   let isUnique = false;
-  const maxAttempts = 10; // Limite máximo de tentativas para evitar loops infinitos
+  const maxAttempts = 10;
   let attempts = 0;
 
   while (!isUnique && attempts < maxAttempts) {

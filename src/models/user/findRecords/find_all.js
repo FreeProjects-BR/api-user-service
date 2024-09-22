@@ -30,6 +30,6 @@ export const userAllModel = async () => {
     });
     return findUsers;
   } catch (error) {
-    throw new Error(`Erro buscar usuários`);
+    throw new Error(`Erro buscar usuários.`);
   }
 };

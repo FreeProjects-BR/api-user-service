@@ -44,7 +44,7 @@ export const userRegisterServices = async (data) => {
   // Se houver campos ausentes, cria uma mensagem dinâmica
   if (missingFields.length > 0) {
     const error = new Error(
-      `${missingFields.join(', ')} ${missingFields.length > 1 ? 'são obrigatórios.' : 'é obrigatório.'}`,
+      `${missingFields.join(', ')} ${missingFields.length > 1 ? 'são obrigatórios.' : 'é obrigatório(a).'}`,
     );
     error.statusCode = 400;
     throw error;

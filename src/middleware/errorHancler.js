@@ -1,9 +1,9 @@
 /**
  * Middleware global de tratamento de erros.
- * @param {Error} err - O objeto de erro lançado.
- * @param {Object} req - O objeto de solicitação do Express.
- * @param {Object} res - O objeto de resposta do Express.
- * @param {Function} next - Função de middleware para passar o controle para o próximo manipulador.
+ * @param {Error} err
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
  * @returns {void}
  */
 export const errorHandler = (err, req, res, next) => {

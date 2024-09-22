@@ -3,7 +3,10 @@ import { userAllServices } from '../../../services/user/findRecords/find_all.js'
 /**
  * Controller para obter todos os usuários.
  * @param {Object} req
+ * @param {Object} req.body
  * @param {Object} res
+ * @param {Function} next
+ * @returns {Promise<void>}
  */
 
 export const userAllController = async (req, res, next) => {

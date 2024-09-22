@@ -50,7 +50,6 @@ export const userRegisterModel = async (data) => {
       data: newUser,
     };
   } catch (error) {
-    console.error('Erro detalhado ao criar usuário:', error); // Adicione esta linha
     const customError = new Error('Error ao criar usuário no banco de dados.');
     customError.statusCode = 500;
     throw customError;
